@@ -18,11 +18,26 @@ Route::get('/', function () {
 });
 
 Route::get('test', function () {
-   return view('test');
+    return view('test');
 });
 
-Route::get('hello', function() {
+Route::get('hello', function () {
     return view('hello', [
-       'name' => request('name')
-   ]);
+        'name' => request('name')
+    ]);
+});
+
+Route::get('posts/{post}', function ($post) {
+    $posts = [
+        'my-first-post' => 'Hello, this is my first blog post',
+        'my-second-post' => 'Now I am getting the hang of this blogging thing.'
+    ];
+
+    if (!array_key_exists($post, $posts)) {
+        abort(404, 'Sorry, that post was not found.');
+    }
+
+    return view('blog', [
+        'post' => $posts[$post]
+    ]);
 });
