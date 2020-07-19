@@ -37,7 +37,10 @@ Route::get('posts/{post}', function ($post) {
         abort(404, 'Sorry, that post was not found.');
     }
 
-    return view('blog', [
+    return view('posts', [
         'post' => $posts[$post]
     ]);
 });
+
+
+Route::get('blog/{post}', 'BlogController@index');
